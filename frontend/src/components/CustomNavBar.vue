@@ -10,16 +10,17 @@
           <!-- Right aligned nav items -->
           <b-navbar-nav class="ml-auto">
             <b-nav-item to="/">Home</b-nav-item>
-            <b-nav-item v-if="loggedIn" to="/reviews">Reviews</b-nav-item>
-            <b-nav-item v-if="loggedIn" to="/reviews/stats">Stats</b-nav-item>
+            <b-nav-item v-if="loggedIn" :to="{ name: 'reviews' }">Reviews</b-nav-item>
+            <b-nav-item v-if="loggedIn" :to="{ name: 'review-add' }">Add review</b-nav-item>
+            <b-nav-item v-if="loggedIn" :to="{ name: 'reviews-stats' }">Stats</b-nav-item>
 
             <b-nav-item-dropdown v-if="loggedIn" right>
               <!-- Using 'button-content' slot -->
               <template slot="button-content"><em>Account</em></template>
-              <b-dropdown-item to="/logout">Sign Out</b-dropdown-item>
+              <b-dropdown-item :to="{ name: 'logout' }">Sign Out</b-dropdown-item>
             </b-nav-item-dropdown>
 
-            <b-nav-item v-if="!loggedIn" to="/login">Login</b-nav-item>
+            <b-nav-item v-if="!loggedIn" :to="{ name: 'login' }">Login</b-nav-item>
           </b-navbar-nav>
         </b-collapse>
       </div>

@@ -5,6 +5,7 @@ import MainComponent from '@/components/MainComponent.vue'
 import LoginComponent from '@/components/LoginComponent.vue'
 import ReviewsComponent from '@/components/ReviewsComponent.vue'
 import ReviewsStatsComponent from '@/components/ReviewsStatsComponent.vue'
+import ReviewCreateComponent from '@/components/ReviewCreateComponent.vue'
 
 import * as AuthHelper from './authHelper'
 import store from './store'
@@ -55,6 +56,13 @@ const routes = [
       initialSearchString: route.query.q,
       initialPage: parseInt(route.query.p)
     }),
+    beforeEnter: restrictedBeforeEnter
+  },
+
+  {
+    path: '/reviews/add',
+    name: 'review-add',
+    component: ReviewCreateComponent,
     beforeEnter: restrictedBeforeEnter
   },
 

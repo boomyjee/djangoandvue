@@ -17,7 +17,11 @@ const state = {
     current_page: 1,
     total_pages: 0
   },
-  reviews: []
+  reviews: [],
+  create: {
+    connectionError: false,
+    createdSuccessfully: false
+  }
 }
 
 const getters = {}
@@ -31,6 +35,14 @@ const mutations = {
     state.reviews = payload.results
     state.filtering.items_count = payload.count
     state.filtering.total_pages = Math.ceil(payload.count / ITEMS_PER_PAGE)
+  },
+
+  setCreateConnectionError (state, bool) {
+    state.create.connectionError = bool
+  },
+
+  setCreatedSuccessfully (state, bool) {
+    state.create.createdSuccessfully = bool
   }
 }
 
@@ -87,6 +99,24 @@ const actions = {
         commit('setReviews', response.data)
       })
       .catch(e => { console.error(e) })
+  },
+
+  async createReview ({ dispatch, commit }, payload) {
+    dispatch('clearCreateState')
+    console.log(payload)
+
+    return axios.post('/api/reviews/add', payload)
+      .then(response => {
+        commit('setCreatedSuccessfully', true)
+      })
+      .catch(e => {
+        commit('setCreateConnectionError', true)
+      })
+  },
+
+  clearCreateState ({ commit }) {
+    commit('setCreateConnectionError', false)
+    commit('setCreatedSuccessfully', false)
   }
 }
 

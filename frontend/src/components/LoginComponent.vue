@@ -6,7 +6,7 @@
       Please check your credentials and try again
     </div>
 
-    <div v-if="auth.setConnectionError" class="alert alert-danger" role="alert">
+    <div v-if="auth.connectionError" class="alert alert-danger" role="alert">
       Please check your connection and try again later
     </div>
 
@@ -59,11 +59,6 @@ export default {
 
     submitLoginForm: function (e) {
       e.preventDefault()
-
-      const email = this.email
-      const password = this.password
-      const rememberMe = this.rememberMe
-
 
       this.login({
         email: this.email,
