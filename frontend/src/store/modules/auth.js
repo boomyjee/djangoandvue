@@ -4,7 +4,7 @@ import * as AuthHelper from '../../authHelper'
 const state = {
   loggedIn: AuthHelper.checkLoggedId(),
   authError: false,
-  setConnection: false
+  connectionError: false
 }
 
 const getters = {}
@@ -19,7 +19,7 @@ const mutations = {
   },
 
   setConnectionError (state, bool) {
-    state.setConnection = bool
+    state.connectionError = bool
   }
 }
 

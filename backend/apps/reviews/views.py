@@ -13,6 +13,21 @@ class ReviewViewSet(viewsets.ModelViewSet):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
 
+    @action(methods=['POST'], detail=False)
+    def add(self, request):
+        author_name = request.data.get('author_name', None)
+        title = request.data.get('title', None)
+        review_text = request.data.get('text', None)
+        review_mark = request.data.get('mark', None)
+
+        review = Review.objects.create(
+            title=title,
+            author_name=author_name,
+            review_text=review_text,
+            review_mark=review_mark
+        )
+        return Response(ReviewSerializer(review).data, status=status.HTTP_201_CREATED)
+
     @action(methods=['GET'], detail=False)
     def stats(self, request, format=None):
         positive_review_count = Review.objects.filter(review_mark=REVIEW_MARK_POSITIVE).count()
