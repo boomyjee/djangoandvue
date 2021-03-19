@@ -6,4 +6,4 @@ psycopg2-binary==2.8.3
 requests==2.22.0
 Werkzeug==0.15.5
 raven==6.10.0
-djangorestframework==3.10.2
+djangorestframework==3.11.2
